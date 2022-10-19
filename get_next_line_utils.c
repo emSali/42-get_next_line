@@ -6,18 +6,79 @@
 /*   By: esali <esali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:58:05 by esali             #+#    #+#             */
-/*   Updated: 2022/10/16 18:12:09 by esali            ###   ########.fr       */
+/*   Updated: 2022/10/19 22:12:37 by esali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
-	int len;
+	int	i;
 
-	len = 0;
-	while(str[len] != 0)
-		len++;
-	return (len);
+	i = 0;
+	while(!str[i])
+		i++;
+	return (i);
 }
+
+// checks if String str has a new line
+int	has_new_line(char *str)
+{
+	while(*str != '\0')
+	{
+		if (*str == '\n')
+			return 1;
+		str++;
+	}
+	return 0;
+}
+
+//concats two Strings behind each other, the second string is concatenated until a new line is found
+char	*concat(char *str1, char *str2)
+{
+	char	*ret;
+	int		i;
+
+	if (str1 == 0)
+		ret	= (char *) malloc(sizeof(char) * (ft_strlen(str2) + 1));
+	else
+		ret	= (char *) malloc(sizeof(char) * (ft_strlen(str1) + ft_strlen(str2) + 1));
+	if (!ret)
+		return NULL;
+	//printf("\nstr1: %s", str1);
+	i = 0;
+	while (str1[i] != 0)
+	{
+		ret[i] = str1[i];
+		i++;
+	}
+	//printf("\nstr2: %s", str2);
+	while (str2[0] != 0)
+	{
+		ret[i] = str2[0];
+		i++;
+		if (str2[0] == '\n')
+			return (ret);
+		remove_first_char(str2);
+		//printf("\nstr2: %s", str2);
+	}
+	//printf("\nconcat returns: %s", ret);
+	ret[i] = '\0';
+	return (ret);
+}
+
+//removes first char from String
+void	remove_first_char(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		str[i] = str[i + 1];
+		i++;
+	}
+}
+
+

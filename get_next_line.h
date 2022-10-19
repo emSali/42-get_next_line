@@ -6,7 +6,7 @@
 /*   By: esali <esali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 15:40:51 by esali             #+#    #+#             */
-/*   Updated: 2022/10/16 18:12:27 by esali            ###   ########.fr       */
+/*   Updated: 2022/10/19 21:42:45 by esali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,14 @@
 # include <stdio.h>
 # include <ctype.h>
 # include <stdlib.h>
-# include <fcntl.h> 
-# include <errno.h> 
+# include <fcntl.h>
+# include <errno.h>
+# include <stdbool.h>
 
 char	*get_next_line(int fd);
+int		has_new_line(char *str);
+char	*concat(char *str1, char *str2);
 int		ft_strlen(char *str);
+void	remove_first_char(char *str);
 
 #endif

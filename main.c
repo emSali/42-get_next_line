@@ -2,6 +2,7 @@
 
 int main()
 {
-	int fd = open("files/test_nr", O_RDONLY); 
+	int fd = open("files/test_nr", O_RDONLY);
+	printf("\n\n**GNL**\n%s" , get_next_line(fd));
 	printf("\n\n**GNL**\n%s\n\n" , get_next_line(fd));
 }
