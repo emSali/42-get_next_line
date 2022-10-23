@@ -6,7 +6,7 @@
 /*   By: esali <esali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:58:05 by esali             #+#    #+#             */
-/*   Updated: 2022/10/19 22:12:37 by esali            ###   ########.fr       */
+/*   Updated: 2022/10/23 10:23:01 by esali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,13 @@ int	has_new_line(char *str)
 	while(*str != '\0')
 	{
 		if (*str == '\n')
+		{
+			// printf("\n has_new_line returns: true\n");
 			return 1;
+		}
 		str++;
 	}
+	// printf("\n has_new_line returns: false\n");
 	return 0;
 }
 
@@ -46,24 +50,23 @@ char	*concat(char *str1, char *str2)
 		ret	= (char *) malloc(sizeof(char) * (ft_strlen(str1) + ft_strlen(str2) + 1));
 	if (!ret)
 		return NULL;
-	//printf("\nstr1: %s", str1);
 	i = 0;
 	while (str1[i] != 0)
 	{
 		ret[i] = str1[i];
 		i++;
 	}
-	//printf("\nstr2: %s", str2);
 	while (str2[0] != 0)
 	{
 		ret[i] = str2[0];
-		i++;
-		if (str2[0] == '\n')
-			return (ret);
 		remove_first_char(str2);
-		//printf("\nstr2: %s", str2);
+		if (ret[i] == '\n')
+		{
+			ret[i] = '\0';
+			return (ret);
+		}
+		i++;
 	}
-	//printf("\nconcat returns: %s", ret);
 	ret[i] = '\0';
 	return (ret);
 }
