@@ -6,7 +6,7 @@
 /*   By: esali <esali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:58:05 by esali             #+#    #+#             */
-/*   Updated: 2022/10/23 10:23:01 by esali            ###   ########.fr       */
+/*   Updated: 2022/10/24 17:35:11 by esali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ int	ft_strlen(char *str)
 	int	i;
 
 	i = 0;
-	while(!str[i])
+	while(str[i])
 		i++;
+	printf("\nft_strlen returns: %i", i);
 	return (i);
 }
 
