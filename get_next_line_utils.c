@@ -12,14 +12,14 @@
 
 #include "get_next_line.h"
 
+//returns lenght -1
 int	ft_strlen(char *str)
 {
-	int	i;
+	unsigned long	i;
 
 	i = 0;
-	while(str[i])
+	while (str[i])
 		i++;
-	printf("\nft_strlen returns: %i", i);
 	return (i);
 }
 
@@ -63,7 +63,7 @@ char	*concat(char *str1, char *str2)
 		remove_first_char(str2);
 		if (ret[i] == '\n')
 		{
-			ret[i] = '\0';
+			ret[i + 1] = '\0';
 			return (ret);
 		}
 		i++;

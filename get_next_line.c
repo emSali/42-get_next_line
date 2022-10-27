@@ -12,56 +12,51 @@
 
 #include "get_next_line.h"
 
+//last_char : not reading ret[-1] first loop
 char	*get_next_line(int fd)
 {
 	static char	*save_file;
 	char		*ret;
 	int			i;
+	char		last_char;
 
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, NULL, 0) < 0)
+		return (0);
 	i = 1;
-	printf("\nsave_file at beginning: %s\n", save_file);
-	if (save_file == NULL)
+	if (!save_file)
 	{
 		save_file = (char *) malloc((BUFFER_SIZE + 1) * sizeof(char));
 		if (!save_file)
 			return (NULL);
+		save_file[0] = '\0';
+		printf("\nsave_file: %s", save_file);
 	}
-	ret = (char *)malloc(sizeof(char) * 1);
+	ret = (char *)malloc(sizeof(char));
 	if (!ret)
 		return (NULL);
 	ret[0] = '\0';
+	last_char = ret[0];
 	/*
 	the while should save new characters until ret[strlen(ret) -1 ] == newline
 	CONCAT:
 	should make copy of ret and then free ret everytime and reallocate by concatenating the copied version of ret with save_file until
 	*/
-	while (ret[ft_strlen(ret)] != '\n')
+	while (last_char != '\n')
 	{
-		printf("\nret length: %i \nret value: %c", ft_strlen(ret), ret[ft_strlen(ret)]);
-		i = read(fd, save_file, BUFFER_SIZE);
-		// printf("\ni %i:\n", i);
-		printf("\nsave_file in while: %s\n", save_file);
+		if (ft_strlen(save_file) == 0)
+			i = read(fd, save_file, BUFFER_SIZE);
 		if (i == -1)
-		{
-			printf("\ni is -1, returns NULL");
 			return (NULL);
-		}
 		if (i == 0)
-		{
-			printf("\ni is 0, breaks");
 			break;
-		}
 		ret = concat(ret, save_file);
-		printf("\nsave_file after concat: %s\n", save_file);
-		printf("\nret in while: %s\n", ret);
-
+		last_char = ret[ft_strlen(ret) - 1];
 	}
-	if (*ret == '\0')
+	if (ret[0] == '\0')
 	{
 		free(save_file);
 		return (NULL);
 	}
-	printf("\nreturn: %s\n", ret);
 	return (ret);
 }
 
