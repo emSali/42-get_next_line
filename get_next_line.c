@@ -24,8 +24,7 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, NULL, 0) < 0)
 		return (0);
 	i = 1;
-	
-	ret = (char *)malloc(sizeof(char));
+	ret = (char *)malloc(sizeof(char) * 1);
 	if (!ret)
 		return (NULL);
 	ret[0] = '\0';
@@ -47,7 +46,7 @@ char	*get_next_line(int fd)
 		if (i == 0)
 			break;
 		tmp = ret;
-		ret = concat(tmp, save_file);
+		ret = concat(ret, save_file);
 		//making function that is removing first line from save instead of remove first char
 		// needs to reallocate memory
 		free(tmp);

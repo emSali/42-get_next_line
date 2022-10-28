@@ -30,7 +30,7 @@ char	*concat(char *str1, char *str2)
 	int		i;
 	int		j;
 
-	ret	= (char *) malloc(sizeof(char) * (ft_strlen(str1) + ft_strlen(str2) - 1));
+	ret	= (char *) malloc(sizeof(char) * (ft_strlen(str1) + ft_strlen(str2) + 1));
 	if (!ret)
 		return NULL;
 	i = 0;
@@ -81,7 +81,10 @@ char	*remove_first_line(char *str)
 	tmp = str;
 	i = 0;
 	while(tmp[i] != '\n' && tmp[i])
+	{
+		str[i] = str[i + 1];
 		i++;
+	}
 	if (tmp[i] == '\n')
 		i++;
 	ret = (char *)malloc(sizeof(char) * (ft_strlen(tmp) - i));
