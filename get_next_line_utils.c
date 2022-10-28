@@ -23,81 +23,68 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-//concats two Strings behind each other, the second string is concatenated until a new line is found
-char	*concat(char *str1, char *str2)
+char	last_char(char *str)
+{
+	if (ft_strlen(str) == 0)
+		return (0);
+	return (str[ft_strlen(str) - 1]);
+}
+
+char	*concat(char *s1, char *s2)
 {
 	char	*ret;
 	int		i;
 	int		j;
 
-	ret	= (char *) malloc(sizeof(char) * (ft_strlen(str1) + ft_strlen(str2) + 1));
+	ret = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!ret)
-		return NULL;
+		return (NULL);
 	i = 0;
-	while (str1[i] != 0)
+	while (s1[i] != 0)
 	{
-		ret[i] = str1[i];
+		ret[i] = s1[i];
 		i++;
 	}
 	j = 0;
-	while (str2[0] != 0)
+	while (s2[j] != 0)
 	{
-		ret[i] = str2[0];
-		remove_first_char(str2);
+		ret[i] = s2[j];
 		if (ret[i] == '\n')
 		{
 			ret[i + 1] = '\0';
 			return (ret);
 		}
-		i++;
 		j++;
+		i++;
 	}
 	ret[i] = '\0';
 	return (ret);
 }
 
-//removes first char from String
-void	remove_first_char(char *str)
+void	remove_first_line(char *str)
 {
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		str[i] = str[i + 1];
-		i++;
-	}
-}
-
-char	*remove_first_line(char *str)
-{
-	char	*tmp;
-	char	*ret;
 	int		i;
-	int		j;
 
-	if (str == NULL)
-		return (NULL);
-	tmp = str;
+	while(str[0] != '\n' && str[0] != 0)
+	{
+		i = 0;
+		while(str[i] != 0)
+		{
+			str[i] = str[i + 1];
+			i++;
+		}
+		str[i] = 0;
+	}
 	i = 0;
-	while(tmp[i] != '\n' && tmp[i])
+	if (str[0] == '\n')
 	{
-		str[i] = str[i + 1];
-		i++;
+		while (str[i] != '\0')
+		{
+			str[i] = str[i + 1];
+			i++;
+		}
 	}
-	if (tmp[i] == '\n')
-		i++;
-	ret = (char *)malloc(sizeof(char) * (ft_strlen(tmp) - i));
-	j = 0;
-	while(tmp[i])
-	{
-		ret[j] = tmp[i];
-		i++;
-		j++;
-	}
-	ret[j] = 0;
-	free(tmp);
-	return (ret);
+	str[i] = 0;
 }
 
 

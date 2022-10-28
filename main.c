@@ -8,9 +8,12 @@ int main()
 	str = get_next_line(fd);
 	while (str != 0){
 		printf("\n\n**GNL**\n%s\n\n" , str);
+		free(str);
 		str = get_next_line(fd);
 	}
 	// printf("\n\n**GNL**\n%s\n\n" , str);
 	// str = get_next_line(fd);
 	printf("\n\n**GNL**\n%s\n\n" , str);
+	if (str)
+		free(str);
 }

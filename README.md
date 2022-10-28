@@ -6,3 +6,9 @@ Forbidden
 
 Look at: 
 - Heap vs. Stack memory
+-> for static variables is fix memory allowed
+
+- what is the statement at beginning (last part)
+
+- Timeout --> what is the time of the tester and what does it has to be for my code?
+
