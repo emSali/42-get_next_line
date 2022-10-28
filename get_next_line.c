@@ -15,22 +15,16 @@
 //last_char : not reading ret[-1] first loop
 char	*get_next_line(int fd)
 {
-	static char	*save_file;
+	static char	save_file[BUFFER_SIZE + 1];
 	char		*ret;
 	int			i;
 	char		last_char;
+	char		*tmp;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, NULL, 0) < 0)
 		return (0);
 	i = 1;
-	if (!save_file)
-	{
-		save_file = (char *) malloc((BUFFER_SIZE + 1) * sizeof(char));
-		if (!save_file)
-			return (NULL);
-		save_file[0] = '\0';
-		printf("\nsave_file: %s", save_file);
-	}
+	
 	ret = (char *)malloc(sizeof(char));
 	if (!ret)
 		return (NULL);
@@ -44,17 +38,23 @@ char	*get_next_line(int fd)
 	while (last_char != '\n')
 	{
 		if (ft_strlen(save_file) == 0)
+		{
 			i = read(fd, save_file, BUFFER_SIZE);
+			save_file[i] = '\0';
+		}
 		if (i == -1)
 			return (NULL);
 		if (i == 0)
 			break;
-		ret = concat(ret, save_file);
+		tmp = ret;
+		ret = concat(tmp, save_file);
+		//making function that is removing first line from save instead of remove first char
+		// needs to reallocate memory
+		free(tmp);
 		last_char = ret[ft_strlen(ret) - 1];
 	}
 	if (ret[0] == '\0')
 	{
-		free(save_file);
 		return (NULL);
 	}
 	return (ret);

@@ -23,9 +23,9 @@
 # include <stdbool.h>
 
 char	*get_next_line(int fd);
-int		has_new_line(char *str);
 char	*concat(char *str1, char *str2);
 int		ft_strlen(char *str);
 void	remove_first_char(char *str);
+char	*remove_first_line(char *str);
 
 #endif

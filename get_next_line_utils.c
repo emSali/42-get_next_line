@@ -23,32 +23,14 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-// checks if String str has a new line
-int	has_new_line(char *str)
-{
-	while(*str != '\0')
-	{
-		if (*str == '\n')
-		{
-			// printf("\n has_new_line returns: true\n");
-			return 1;
-		}
-		str++;
-	}
-	// printf("\n has_new_line returns: false\n");
-	return 0;
-}
-
 //concats two Strings behind each other, the second string is concatenated until a new line is found
 char	*concat(char *str1, char *str2)
 {
 	char	*ret;
 	int		i;
+	int		j;
 
-	if (str1 == 0)
-		ret	= (char *) malloc(sizeof(char) * (ft_strlen(str2) + 1));
-	else
-		ret	= (char *) malloc(sizeof(char) * (ft_strlen(str1) + ft_strlen(str2) + 1));
+	ret	= (char *) malloc(sizeof(char) * (ft_strlen(str1) + ft_strlen(str2) - 1));
 	if (!ret)
 		return NULL;
 	i = 0;
@@ -57,6 +39,7 @@ char	*concat(char *str1, char *str2)
 		ret[i] = str1[i];
 		i++;
 	}
+	j = 0;
 	while (str2[0] != 0)
 	{
 		ret[i] = str2[0];
@@ -67,6 +50,7 @@ char	*concat(char *str1, char *str2)
 			return (ret);
 		}
 		i++;
+		j++;
 	}
 	ret[i] = '\0';
 	return (ret);
@@ -83,6 +67,34 @@ void	remove_first_char(char *str)
 		str[i] = str[i + 1];
 		i++;
 	}
+}
+
+char	*remove_first_line(char *str)
+{
+	char	*tmp;
+	char	*ret;
+	int		i;
+	int		j;
+
+	if (str == NULL)
+		return (NULL);
+	tmp = str;
+	i = 0;
+	while(tmp[i] != '\n' && tmp[i])
+		i++;
+	if (tmp[i] == '\n')
+		i++;
+	ret = (char *)malloc(sizeof(char) * (ft_strlen(tmp) - i));
+	j = 0;
+	while(tmp[i])
+	{
+		ret[j] = tmp[i];
+		i++;
+		j++;
+	}
+	ret[j] = 0;
+	free(tmp);
+	return (ret);
 }
 
 
