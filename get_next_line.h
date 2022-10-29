@@ -6,7 +6,7 @@
 /*   By: esali <esali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 15:40:51 by esali             #+#    #+#             */
-/*   Updated: 2022/10/19 21:42:45 by esali            ###   ########.fr       */
+/*   Updated: 2022/10/29 20:56:39 by esali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ char	*get_next_line(int fd);
 char	*concat(char *str1, char *str2);
 int		ft_strlen(char *str);
 void    remove_first_line(char *str);
-char	last_char(char *str);
+char	*gnl(char *ret, char *save_file, int fd);
 
 #endif

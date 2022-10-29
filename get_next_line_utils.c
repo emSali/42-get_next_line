@@ -6,13 +6,40 @@
 /*   By: esali <esali@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:58:05 by esali             #+#    #+#             */
-/*   Updated: 2022/10/24 17:35:11 by esali            ###   ########.fr       */
+/*   Updated: 2022/10/29 21:02:33 by esali            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-//returns lenght -1
+char	*gnl(char *ret, char *save_file, int fd)
+{
+	char	*tmp;
+	char	last_char;
+	int		i;
+
+	last_char = '\0';
+	i = 0;
+	while (last_char != '\n')
+	{
+		if (ft_strlen(save_file) == 0)
+		{
+			i = read(fd, save_file, BUFFER_SIZE);
+			save_file[i] = '\0';
+			if (i == -1)
+				return (NULL);
+			if (i == 0)
+				break ;
+		}
+		tmp = ret;
+		ret = concat(ret, save_file);
+		free(tmp);
+		remove_first_line(save_file);
+		last_char = ret[ft_strlen(ret) - 1];
+	}
+	return (ret);
+}
+
 int	ft_strlen(char *str)
 {
 	unsigned long	i;
@@ -21,13 +48,6 @@ int	ft_strlen(char *str)
 	while (str[i])
 		i++;
 	return (i);
-}
-
-char	last_char(char *str)
-{
-	if (ft_strlen(str) == 0)
-		return (0);
-	return (str[ft_strlen(str) - 1]);
 }
 
 char	*concat(char *s1, char *s2)
@@ -63,7 +83,7 @@ char	*concat(char *s1, char *s2)
 
 void	remove_first_line(char *str)
 {
-	int		i;
+	int	i;
 
 	while(str[0] != '\n' && str[0] != 0)
 	{
