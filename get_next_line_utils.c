@@ -59,12 +59,7 @@ char	*concat(char *s1, char *s2)
 	ret = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!ret)
 		return (NULL);
-	i = 0;
-	while (s1[i] != 0)
-	{
-		ret[i] = s1[i];
-		i++;
-	}
+	i = cpy_ret(ret, s1);
 	j = 0;
 	while (s2[j] != 0)
 	{
@@ -79,6 +74,19 @@ char	*concat(char *s1, char *s2)
 	}
 	ret[i] = '\0';
 	return (ret);
+}
+
+int	cpy_ret(char *ret, char *s1)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] != 0)
+	{
+		ret[i] = s1[i];
+		i++;
+	}
+	return (i);
 }
 
 void	remove_first_line(char *str)
