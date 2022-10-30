@@ -85,10 +85,10 @@ void	remove_first_line(char *str)
 {
 	int	i;
 
-	while(str[0] != '\n' && str[0] != 0)
+	while (str[0] != '\n' && str[0] != 0)
 	{
 		i = 0;
-		while(str[i] != 0)
+		while (str[i] != 0)
 		{
 			str[i] = str[i + 1];
 			i++;
@@ -106,5 +106,3 @@ void	remove_first_line(char *str)
 	}
 	str[i] = 0;
 }
-
-

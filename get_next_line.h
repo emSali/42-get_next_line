@@ -25,7 +25,8 @@
 char	*get_next_line(int fd);
 char	*concat(char *str1, char *str2);
 int		ft_strlen(char *str);
-void    remove_first_line(char *str);
+void	remove_first_line(char *str);
 char	*gnl(char *ret, char *save_file, int fd);
+char	*concat_until_nl(char *s1, char *s2, int i);
 
 #endif
